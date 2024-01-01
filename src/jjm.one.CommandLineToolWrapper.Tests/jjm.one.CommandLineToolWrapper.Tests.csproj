@@ -7,7 +7,6 @@
         <Version>1.0.0-alpha.1</Version>
         <Authors>Jonas Merkle [JJM]</Authors>
         <Copyright>© by Jonas Merkle [JJM], 2024.</Copyright>
-        <RootNamespace>jjm.one.CommandLineToolWrappe.Tests</RootNamespace>
         <Title>jjm.one.CommandLineToolWrappe.Tests</Title>
         <Description>A C# library that provides a wrapper for command line tools. (Unit-Tests)</Description>
         <PackageTags>csharp, wrapper, command-line-tool</PackageTags>
@@ -37,10 +36,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\jjm.one.CommandLineToolWrapper\jjm.one.CommandLineToolWrapper.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="backend\" />
     </ItemGroup>
 
 </Project>
