@@ -1,3 +1,5 @@
+using System;
+
 namespace jjm.one.CommandLineToolWrapper.types;
 
 public class ProcessFailedException(int exitCode, string command, string arguments, string? output = null)

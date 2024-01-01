@@ -1,5 +1,9 @@
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using jjm.one.CommandLineToolWrapper.backend;
 using jjm.one.CommandLineToolWrapper.settings;
 using jjm.one.CommandLineToolWrapper.types;
