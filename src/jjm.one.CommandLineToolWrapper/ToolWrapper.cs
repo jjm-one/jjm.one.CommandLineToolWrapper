@@ -35,9 +35,14 @@ public partial class ToolWrapper : IToolWrapper
     private readonly IProcessRunner _processRunner;
 
     /// <summary>
-    /// The settings for the tool.
+    /// The settings for the command line tool.
     /// </summary>
-    private readonly ToolSettings _settings;
+    private readonly ToolSettings _toolSettings;
+    
+    /// <summary>
+    /// The settings for the command line tool wrapper.
+    /// </summary>
+    private readonly WrapperSettings _wrapperSettings;
 
     /// <summary>
     /// The logger used to log information about the tool's operations.
@@ -56,13 +61,16 @@ public partial class ToolWrapper : IToolWrapper
     /// <summary>
     /// Initializes a new instance of the <see cref="ToolWrapper"/> class.
     /// </summary>
-    /// <param name="settings">The settings for the tool.</param>
+    /// <param name="toolSettings">The settings for the command line tool.</param>
+    /// <param name="wrapperSettings">The settings for the command line tool wrapper.</param>
     /// <param name="processRunner">The process runner to use. If null, a new <see cref="ProcessRunner"/> will be created.</param>
     /// <param name="logger">The logger to use. If null, logging will be disabled.</param>
-    public ToolWrapper(ToolSettings settings, IProcessRunner? processRunner = null, ILogger<ToolWrapper>? logger = null)
+    public ToolWrapper(ToolSettings toolSettings, WrapperSettings wrapperSettings,
+        IProcessRunner? processRunner = null, ILogger<ToolWrapper>? logger = null)
     {
         _processRunner = processRunner ?? new ProcessRunner();
-        _settings = settings;
+        _toolSettings = toolSettings;
+        _wrapperSettings = wrapperSettings;
         _logger = logger;
         
         // initialize the command templates
@@ -73,7 +81,7 @@ public partial class ToolWrapper : IToolWrapper
         };
         
         // add the command templates from the settings
-        foreach (var command in _settings.CommandTemplates)
+        foreach (var command in _toolSettings.CommandTemplates)
         {
             _commandTemplates[command.Key] = command.Value;
         }
@@ -90,8 +98,8 @@ public partial class ToolWrapper : IToolWrapper
         var retryPolicy = Policy
             .Handle<ProcessFailedException>(ex =>
                 CheckExitCode(ex.ExitCode) || CheckOutput(ex.Output))
-            .WaitAndRetryAsync(_settings.RetryCount, _ => 
-                    TimeSpan.FromSeconds(_settings.RetryIntervalInSeconds),
+            .WaitAndRetryAsync(_wrapperSettings.RetryCount, _ => 
+                    TimeSpan.FromSeconds(_wrapperSettings.RetryIntervalInSeconds),
                 (exception, _, retryCount, _) =>
                 {
                     _logger?.LogWarning(
@@ -125,10 +133,10 @@ public partial class ToolWrapper : IToolWrapper
             var arguments = string.Format(commandTemplate, args);
             var startInfo = new ProcessStartInfo
             {
-                FileName = _settings.ToolPath,
+                FileName = _toolSettings.ToolPath,
                 Arguments = arguments,
-                WorkingDirectory = _settings.WorkingDirectory,
-                ErrorDialog = _settings.ErrorDialog
+                WorkingDirectory = _wrapperSettings.WorkingDirectory,
+                ErrorDialog = _wrapperSettings.ErrorDialog
             };
 
             _logger?.LogDebug("Starting process with command: '{startInfo.FileName} {startInfo.Arguments}'",
@@ -184,7 +192,7 @@ public partial class ToolWrapper : IToolWrapper
     /// <returns>True if the exit code should trigger a retry, false otherwise.</returns>
     private bool CheckExitCode(int exitCode)
     {
-        return _settings.RetryUseExitCodeAnalysis && _settings.RetryExitCodes.Contains(exitCode);
+        return _wrapperSettings.RetryUseExitCodeAnalysis && _toolSettings.RetryExitCodes.Contains(exitCode);
     }
     
     /// <summary>
@@ -194,7 +202,7 @@ public partial class ToolWrapper : IToolWrapper
     /// <returns>True if the output should trigger a retry, false otherwise.</returns>
     private bool CheckOutput(string? output)
     {
-        return output != null && _settings.RetryUseOutputAnalysis && _settings.RetryOutputContains.Any(output.Contains);
+        return output != null && _wrapperSettings.RetryUseOutputAnalysis && _toolSettings.RetryOutputContains.Any(output.Contains);
     }
 
     #endregion

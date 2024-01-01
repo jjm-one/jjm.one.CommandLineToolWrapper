@@ -3,22 +3,32 @@ using System.Collections.Generic;
 
 namespace jjm.one.CommandLineToolWrapper.settings;
 
+/// <summary>
+/// Represents the settings for a command line tool.
+/// </summary>
 public class ToolSettings
 {
+    /// <summary>
+    /// Gets or sets the path to the tool.
+    /// </summary>
     public string ToolPath { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the command templates for the tool.
+    /// </summary>
     public Dictionary<string, string> CommandTemplates { get; set; } = new()
     {
         ["help"] = "--help",
         ["version"] = "--version"
     };
-    
-    public string WorkingDirectory { get; set; } = Environment.CurrentDirectory;
-    public bool ErrorDialog { get; set; } = false;
 
-    public int RetryCount { get; set; } = 3;
-    public int RetryIntervalInSeconds { get; set; } = 10;
-    public bool RetryUseOutputAnalysis { get; set; } = true;
-    public bool RetryUseExitCodeAnalysis { get; set; } = true;
+    /// <summary>
+    /// Gets or sets the output strings that trigger a retry.
+    /// </summary>
     public List<string> RetryOutputContains { get; set; } = ["network error", "timeout"];
+
+    /// <summary>
+    /// Gets or sets the exit codes that trigger a retry.
+    /// </summary>
     public List<int> RetryExitCodes { get; set; } = [1];
 }
