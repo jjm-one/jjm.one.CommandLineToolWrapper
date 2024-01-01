@@ -9,7 +9,7 @@ using Polly;
 namespace jjm.one.LetsEncryptClient;
 
 /// <summary>
-/// Represents a wrapper for a tool that can run commands.
+/// The default implementation of the <see cref="IToolWrapper"/> interface.
 /// </summary>
 public partial class ToolWrapper : IToolWrapper
 {
@@ -79,18 +79,13 @@ public partial class ToolWrapper : IToolWrapper
 
     #region interface implementation
 
-    /// <summary>
-    /// Runs a command asynchronously.
-    /// </summary>
-    /// <param name="command">The command to run.</param>
-    /// <param name="args">The arguments for the command.</param>
-    /// <returns>A <see cref="Task"/> representing the asynchronous operation, with a <see cref="ProcessResult"/> as the result.</returns>
+    /// <InheritDoc />
     public async Task<ProcessResult> RunCommandAsync(string command, params object?[] args)
     {
         // initialize the retry policy
         var retryPolicy = Policy
             .Handle<ProcessFailedException>(ex =>
-                CheckExitCode(ex.ExitCode) && CheckOutput(ex.Output))
+                CheckExitCode(ex.ExitCode) || CheckOutput(ex.Output))
             .WaitAndRetryAsync(_settings.RetryCount, retryAttempt => 
                     TimeSpan.FromSeconds(_settings.RetryIntervalInSeconds),
                 (exception, timeSpan, retryCount, context) =>
