@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1cdaaa6-72cc-4c6e-a9f0-fb7410f114a3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.jjm.one.LetsEncryptClient/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.jjm.one.LetsEncryptClient/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper.Tests/jjm.one.CommandLineToolWrapper.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper.Tests/jjm.one.CommandLineToolWrapper.Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/IToolWrapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/IToolWrapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/ToolWrapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/ToolWrapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/backend/IProcessRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/backend/IProcessRunner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/backend/ProcessRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/backend/ProcessRunner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/jjm.one.CommandLineToolWrapper.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/jjm.one.CommandLineToolWrapper.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/settings/ToolSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/settings/ToolSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/types/ProcessFailedException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/types/ProcessFailedException.cs" afterDir="false" />
-    </list>
+    <list default="true" id="e1cdaaa6-72cc-4c6e-a9f0-fb7410f114a3" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,7 +59,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1704111546623</updated>
-      <workItem from="1704111547659" duration="9218000" />
+      <workItem from="1704111547659" duration="9424000" />
     </task>
     <servers />
   </component>
