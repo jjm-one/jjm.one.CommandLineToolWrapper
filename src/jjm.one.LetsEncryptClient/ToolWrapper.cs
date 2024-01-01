@@ -8,33 +8,86 @@ using Polly;
 
 namespace jjm.one.LetsEncryptClient;
 
+/// <summary>
+/// Represents a wrapper for a tool that can run commands.
+/// </summary>
 public partial class ToolWrapper : IToolWrapper
 {
+    #region private static members
+
+    /// <summary>
+    /// Represents a regular expression used for pattern matching in the ToolWrapper class.
+    /// </summary>
+    [GeneratedRegex("{.*?}")]
+    private static partial Regex MyRegex();
+
+    #endregion
+
+    #region private members
+
+    /// <summary>
+    /// The process runner used to execute commands.
+    /// </summary>
     private readonly IProcessRunner _processRunner;
+
+    /// <summary>
+    /// The settings for the tool.
+    /// </summary>
     private readonly ToolSettings _settings;
+
+    /// <summary>
+    /// The logger used to log information about the tool's operations.
+    /// </summary>
     private readonly ILogger<ToolWrapper>? _logger;
+
+    /// <summary>
+    /// The dictionary mapping command names to their templates.
+    /// </summary>
     private readonly Dictionary<string, string> _commandTemplates;
 
+    #endregion
+    
+    #region ctor's
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ToolWrapper"/> class.
+    /// </summary>
+    /// <param name="settings">The settings for the tool.</param>
+    /// <param name="processRunner">The process runner to use. If null, a new <see cref="ProcessRunner"/> will be created.</param>
+    /// <param name="logger">The logger to use. If null, logging will be disabled.</param>
     public ToolWrapper(ToolSettings settings, IProcessRunner? processRunner = null, ILogger<ToolWrapper>? logger = null)
     {
         _processRunner = processRunner ?? new ProcessRunner();
         _settings = settings;
         _logger = logger;
         
+        // initialize the command templates
         _commandTemplates = new Dictionary<string, string>
         {
             { "help", "--help" },
             { "version", "--version" },
         };
         
+        // add the command templates from the settings
         foreach (var command in _settings.CommandTemplates)
         {
             _commandTemplates[command.Key] = command.Value;
         }
     }
 
+    #endregion
+
+    #region interface implementation
+
+    /// <summary>
+    /// Runs a command asynchronously.
+    /// </summary>
+    /// <param name="command">The command to run.</param>
+    /// <param name="args">The arguments for the command.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation, with a <see cref="ProcessResult"/> as the result.</returns>
     public async Task<ProcessResult> RunCommandAsync(string command, params object?[] args)
     {
+        // initialize the retry policy
         var retryPolicy = Policy
             .Handle<ProcessFailedException>(ex =>
                 CheckExitCode(ex.ExitCode) && CheckOutput(ex.Output))
@@ -47,16 +100,18 @@ public partial class ToolWrapper : IToolWrapper
                         retryCount, command, exception.Message);
                 });
         
+        // execute the command wrapped in the retry policy
         return await retryPolicy.ExecuteAsync(async () =>
         {
+            // check if the command exists
             if (!_commandTemplates.TryGetValue(command, out var commandTemplate))
             {
                 _logger?.LogError("Command '{command}' not found.", command);
                 throw new ArgumentException($"Command '{command}' not found.", nameof(command));
             }
 
+            // check if the number of arguments is correct
             var expectedArgs = MyRegex().Matches(commandTemplate).Count;
-
             if (args.Length != expectedArgs)
             {
                 _logger?.LogError(
@@ -67,6 +122,7 @@ public partial class ToolWrapper : IToolWrapper
                     nameof(args));
             }
 
+            // build the arguments
             var arguments = string.Format(commandTemplate, args);
             var startInfo = new ProcessStartInfo
             {
@@ -84,10 +140,12 @@ public partial class ToolWrapper : IToolWrapper
             _logger?.LogDebug("Starting process with command: '{startInfo.FileName} {startInfo.Arguments}'",
                 startInfo.FileName, startInfo.Arguments);
 
+            // start the stopwatch
             var stopwatch = Stopwatch.StartNew();
 
             try
             {
+                // run the process
                 var result = await _processRunner.RunProcessAsync(startInfo);
 
                 if (_logger != null && _logger.IsEnabled(LogLevel.Debug))
@@ -100,35 +158,50 @@ public partial class ToolWrapper : IToolWrapper
             }
             catch (ProcessFailedException ex)
             {
-                _logger?.LogError(ex, "An error occurred while running the '{command}' command.",
-                    command);
+                _logger?.LogError(ex, "An error occurred while running the '{command}' command.", command);
                 throw;
             }
             catch (Exception ex)
             {
-                _logger?.LogError(ex, "An unexpected error occurred while running the '{command}' command.",
+                _logger?.LogError(ex, "An unexpected error occurred while running the '{command}' command.", 
                     command);
                 throw;
             }
             finally
             {
+                // stop the stopwatch
                 stopwatch.Stop();
+                
+                // log the execution time
                 _logger?.LogTrace("Command '{command}' executed in {stopwatch.Elapsed.TotalSeconds} seconds.",
                     command, stopwatch.Elapsed.TotalSeconds);
             }
         });
     }
 
-    [GeneratedRegex("{.*?}")]
-    private static partial Regex MyRegex();
+    #endregion
     
+    #region private methods
+
+    /// <summary>
+    /// Checks if the exit code should trigger a retry.
+    /// </summary>
+    /// <param name="exitCode">The exit code to check.</param>
+    /// <returns>True if the exit code should trigger a retry, false otherwise.</returns>
     private bool CheckExitCode(int exitCode)
     {
         return _settings.RetryUseExitCodeAnalysis && _settings.RetryExitCodes.Contains(exitCode);
     }
     
+    /// <summary>
+    /// Checks if the output should trigger a retry.
+    /// </summary>
+    /// <param name="output">The output to check.</param>
+    /// <returns>True if the output should trigger a retry, false otherwise.</returns>
     private bool CheckOutput(string? output)
     {
         return output != null && _settings.RetryUseOutputAnalysis && _settings.RetryOutputContains.Any(output.Contains);
     }
+
+    #endregion
 }
