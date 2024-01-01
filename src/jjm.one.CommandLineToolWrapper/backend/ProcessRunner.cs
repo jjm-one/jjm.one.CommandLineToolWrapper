@@ -16,7 +16,7 @@ internal class ProcessRunner : IProcessRunner
         };
 
         var outputBuilder = new StringBuilder();
-        process.OutputDataReceived += (sender, args) => outputBuilder.AppendLine(args.Data);
+        process.OutputDataReceived += (_, args) => outputBuilder.AppendLine(args.Data);
 
         process.Start();
         process.BeginOutputReadLine();

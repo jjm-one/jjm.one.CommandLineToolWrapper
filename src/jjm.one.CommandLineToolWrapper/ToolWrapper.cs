@@ -90,9 +90,9 @@ public partial class ToolWrapper : IToolWrapper
         var retryPolicy = Policy
             .Handle<ProcessFailedException>(ex =>
                 CheckExitCode(ex.ExitCode) || CheckOutput(ex.Output))
-            .WaitAndRetryAsync(_settings.RetryCount, retryAttempt => 
+            .WaitAndRetryAsync(_settings.RetryCount, _ => 
                     TimeSpan.FromSeconds(_settings.RetryIntervalInSeconds),
-                (exception, timeSpan, retryCount, context) =>
+                (exception, _, retryCount, _) =>
                 {
                     _logger?.LogWarning(
                         "Retry {retryCount} for command '{command}' due to an error: {exception.Message}",
