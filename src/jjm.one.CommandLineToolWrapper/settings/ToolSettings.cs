@@ -5,7 +5,7 @@ namespace jjm.one.CommandLineToolWrapper.settings;
 
 public class ToolSettings
 {
-    public string ToolPath { get; set; } = "certbot";
+    public string ToolPath { get; set; } = string.Empty;
     public Dictionary<string, string> CommandTemplates { get; set; } = new()
     {
         ["help"] = "--help",
