@@ -127,12 +127,7 @@ public partial class ToolWrapper : IToolWrapper
             {
                 FileName = _settings.ToolPath,
                 Arguments = arguments,
-                RedirectStandardOutput = _settings.RedirectStandardOutput,
-                RedirectStandardError = _settings.RedirectStandardError,
-                UseShellExecute = _settings.UseShellExecute,
-                CreateNoWindow = _settings.CreateNoWindow,
                 WorkingDirectory = _settings.WorkingDirectory,
-                Verb = _settings.Verb,
                 ErrorDialog = _settings.ErrorDialog
             };
 
