@@ -94,30 +94,32 @@ public partial class ToolWrapper : IToolWrapper
     /// <InheritDoc />
     public async Task<ProcessResult> RunCommandAsync(string command, params object?[] args)
     {
-        // initialize the retry policy
+        // Define a retry policy using Polly
+        // This policy handles ProcessFailedException, which is thrown when the process fails
+        // The policy checks if the exit code or the output of the process indicates a transient error that is worth retrying
         var retryPolicy = Policy
             .Handle<ProcessFailedException>(ex =>
-                CheckExitCode(ex.ExitCode) || CheckOutput(ex.Output))
-            .WaitAndRetryAsync(_wrapperSettings.RetryCount, _ => 
-                    TimeSpan.FromSeconds(_wrapperSettings.RetryIntervalInSeconds),
+                CheckExitCode(ex.ExitCode) || CheckOutput(ex.Output))   // Check if the exception should be handled by the policy
+            .WaitAndRetryAsync(_wrapperSettings.RetryCount,             // The number of retries
+                _ => TimeSpan.FromSeconds(_wrapperSettings.RetryIntervalInSeconds), // The delay between retries
                 (exception, _, retryCount, _) =>
                 {
+                    // On retry, log a warning message
                     _logger?.LogWarning(
                         "Retry {retryCount} for command '{command}' due to an error: {exception.Message}",
                         retryCount, command, exception.Message);
                 });
         
-        // execute the command wrapped in the retry policy
         return await retryPolicy.ExecuteAsync(async () =>
         {
-            // check if the command exists
+            // Check if the command exists in the command templates
             if (!_commandTemplates.TryGetValue(command, out var commandTemplate))
             {
                 _logger?.LogError("Command '{command}' not found.", command);
                 throw new ArgumentException($"Command '{command}' not found.", nameof(command));
             }
 
-            // check if the number of arguments is correct
+            // Count the expected arguments for the command
             var expectedArgs = MyRegex().Matches(commandTemplate).Count;
             if (args.Length != expectedArgs)
             {
@@ -129,8 +131,9 @@ public partial class ToolWrapper : IToolWrapper
                     nameof(args));
             }
 
-            // build the arguments
+            // Format the command arguments
             var arguments = string.Format(commandTemplate, args);
+            // Create a new process start info with the tool path, arguments, and working directory
             var startInfo = new ProcessStartInfo
             {
                 FileName = _toolSettings.ToolPath,
@@ -139,15 +142,16 @@ public partial class ToolWrapper : IToolWrapper
                 ErrorDialog = _wrapperSettings.ErrorDialog
             };
 
+            // Log the command that will be run
             _logger?.LogDebug("Starting process with command: '{startInfo.FileName} {startInfo.Arguments}'",
                 startInfo.FileName, startInfo.Arguments);
 
-            // start the stopwatch
+            // Start a stopwatch to measure the execution time
             var stopwatch = Stopwatch.StartNew();
 
             try
             {
-                // run the process
+                // Run the process asynchronously and get the result
                 var result = await _processRunner.RunProcessAsync(startInfo);
 
                 if (_logger != null && _logger.IsEnabled(LogLevel.Debug))
@@ -156,25 +160,26 @@ public partial class ToolWrapper : IToolWrapper
                         result.ExitCode, result.Output);
                 }
 
+                // Return the process result
                 return result;
             }
             catch (ProcessFailedException ex)
             {
+                // Handle a <see cref="ProcessFailedException"/> by logging the error and throwing it again
                 _logger?.LogError(ex, "An error occurred while running the '{command}' command.", command);
                 throw;
             }
             catch (Exception ex)
             {
+                // Handle any other exception by logging the error and throwing it again
                 _logger?.LogError(ex, "An unexpected error occurred while running the '{command}' command.", 
                     command);
                 throw;
             }
             finally
             {
-                // stop the stopwatch
+                // Stop the stopwatch and log the execution time
                 stopwatch.Stop();
-                
-                // log the execution time
                 _logger?.LogTrace("Command '{command}' executed in {stopwatch.Elapsed.TotalSeconds} seconds.",
                     command, stopwatch.Elapsed.TotalSeconds);
             }
