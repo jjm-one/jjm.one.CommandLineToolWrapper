@@ -1,6 +1,6 @@
-using jjm.one.LetsEncryptClient.types;
+using jjm.one.CommandLineToolWrapper.types;
 
-namespace jjm.one.LetsEncryptClient;
+namespace jjm.one.CommandLineToolWrapper;
 /// <summary>
 /// Represents a wrapper for a command line tool.
 /// </summary>

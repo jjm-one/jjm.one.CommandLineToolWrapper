@@ -1,7 +1,7 @@
 using System.Diagnostics;
-using jjm.one.LetsEncryptClient.types;
+using jjm.one.CommandLineToolWrapper.types;
 
-namespace jjm.one.LetsEncryptClient.backend;
+namespace jjm.one.CommandLineToolWrapper.backend;
 
 public interface IProcessRunner
 {

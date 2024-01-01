@@ -1,4 +1,4 @@
-namespace jjm.one.LetsEncryptClient.types;
+namespace jjm.one.CommandLineToolWrapper.types;
 
 public class ProcessResult(int exitCode, string output)
 {

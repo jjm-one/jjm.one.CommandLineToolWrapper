@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using System.Text;
-using jjm.one.LetsEncryptClient.types;
+using jjm.one.CommandLineToolWrapper.types;
 
-namespace jjm.one.LetsEncryptClient.backend;
+namespace jjm.one.CommandLineToolWrapper.backend;
 
 internal class ProcessRunner : IProcessRunner
 {

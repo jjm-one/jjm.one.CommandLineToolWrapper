@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e1cdaaa6-72cc-4c6e-a9f0-fb7410f114a3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper.Tests/GlobalUsings.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/jjm.one.CommandLineToolWrapper.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.jjm.one.LetsEncryptClient/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.jjm.one.LetsEncryptClient/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.jjm.one.LetsEncryptClient/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.jjm.one.LetsEncryptClient/.idea/indexLayout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.jjm.one.LetsEncryptClient/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jjm.one.LetsEncryptClient.Tests/GlobalUsings.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jjm.one.LetsEncryptClient.Tests/UnitTest1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jjm.one.LetsEncryptClient.Tests/jjm.one.LetsEncryptClient.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper.Tests/jjm.one.CommandLineToolWrapper.Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jjm.one.LetsEncryptClient.sln" beforeDir="false" afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jjm.one.LetsEncryptClient/IToolWrapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/IToolWrapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jjm.one.LetsEncryptClient/ToolWrapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/ToolWrapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jjm.one.LetsEncryptClient/backend/IProcessRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/backend/IProcessRunner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jjm.one.LetsEncryptClient/backend/ProcessRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/backend/ProcessRunner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jjm.one.LetsEncryptClient/jjm.one.LetsEncryptClient.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jjm.one.LetsEncryptClient/settings/ToolSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/settings/ToolSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jjm.one.LetsEncryptClient/types/ProcessFailedException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/types/ProcessFailedException.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jjm.one.LetsEncryptClient/types/ProcessResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/jjm.one.CommandLineToolWrapper/types/ProcessResult.cs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2aLxECUOe46BTuigDld3EoPsiY1" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "5bf82239-0876-42c9-b626-f255bcc1d258.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "a9984b81-4d51-41a2-8abf-c8f8551942c8.executor": "Debug",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "/Users/jonas/Library/Application Support/JetBrains/Rider2023.3/resharper-host/DecompilerCache",
+      "/Users/jonas/Library/Application Support/JetBrains/Rider2023.3/resharper-host/SourcesCache",
+      "/Users/jonas/.local/share/Symbols/src"
+    ]
+  }
+}]]></component>
+  <component name="RunManager" selected="5bf82239-0876-42c9-b626-f255bcc1d258" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e1cdaaa6-72cc-4c6e-a9f0-fb7410f114a3" name="Changes" comment="" />
+      <created>1704111546623</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1704111546623</updated>
+      <workItem from="1704111547659" duration="7579000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>

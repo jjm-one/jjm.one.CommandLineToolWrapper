@@ -1,4 +1,4 @@
-namespace jjm.one.LetsEncryptClient.types;
+namespace jjm.one.CommandLineToolWrapper.types;
 
 public class ProcessFailedException(int exitCode, string command, string arguments, string? output = null)
     : Exception($"The process '{command} {arguments}' exited with code {exitCode}.")

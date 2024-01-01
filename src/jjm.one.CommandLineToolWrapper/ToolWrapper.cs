@@ -1,12 +1,12 @@
 using System.Diagnostics;
 using System.Text.RegularExpressions;
-using jjm.one.LetsEncryptClient.backend;
-using jjm.one.LetsEncryptClient.settings;
-using jjm.one.LetsEncryptClient.types;
+using jjm.one.CommandLineToolWrapper.backend;
+using jjm.one.CommandLineToolWrapper.settings;
+using jjm.one.CommandLineToolWrapper.types;
 using Microsoft.Extensions.Logging;
 using Polly;
 
-namespace jjm.one.LetsEncryptClient;
+namespace jjm.one.CommandLineToolWrapper;
 
 /// <summary>
 /// The default implementation of the <see cref="IToolWrapper"/> interface.

@@ -1,4 +1,4 @@
-namespace jjm.one.LetsEncryptClient.settings;
+namespace jjm.one.CommandLineToolWrapper.settings;
 
 public class ToolSettings
 {

@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jjm.one.LetsEncryptClient", "jjm.one.LetsEncryptClient\jjm.one.LetsEncryptClient.csproj", "{5C080EEA-9136-4FB0-8319-FBD03D9E10B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jjm.one.CommandLineToolWrapper", "jjm.one.CommandLineToolWrapper\jjm.one.CommandLineToolWrapper.csproj", "{5C080EEA-9136-4FB0-8319-FBD03D9E10B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jjm.one.LetsEncryptClient.Tests", "jjm.one.LetsEncryptClient.Tests\jjm.one.LetsEncryptClient.Tests.csproj", "{93BEB27C-89AF-4CD4-A6C7-6428F8A9E3D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jjm.one.CommandLineToolWrapper.Tests", "jjm.one.CommandLineToolWrapper.Tests\jjm.one.CommandLineToolWrapper.Tests.csproj", "{93BEB27C-89AF-4CD4-A6C7-6428F8A9E3D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
