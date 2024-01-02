@@ -65,9 +65,9 @@ public class ProcessRunnerTests
         await act.Should().ThrowAsync<ProcessFailedException>().Where(exc =>
             exc.Result != null &&
             exc.Result.ExitCode == 1 &&
-            exc.Result.Output != null && exc.Result.Error != null && 
+            exc.Result.Output != null && exc.Result.Error != null &&
             exc.Result.Output.Contains(Environment.NewLine) && exc.Result.Error.Contains("test" + Environment.NewLine));
     }
-    
+
     #endregion
 }

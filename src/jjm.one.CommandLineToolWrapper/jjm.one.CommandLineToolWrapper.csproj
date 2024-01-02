@@ -24,12 +24,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
-        <PackageReference Include="Polly" Version="8.2.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0"/>
+        <PackageReference Include="Polly" Version="8.2.0"/>
     </ItemGroup>
 
     <ItemGroup>
-        <InternalsVisibleTo Include="$(AssemblyName).Tests,PublicKey=0024000004800000140100000602000000240000525341310008000001000100afb529302013f08ec4f0240ed399eb5c058b60186982083bd0427ff2ca9a3adf2348eae455b1450332964c0a7c330fff1d51a2a3c5dd88b3a3d44d1f74251df029347c305085808fc0f3ceb8ab9d5fe2744f62e03371c549b94e2ebf2b80fde28da545d08b4ba4ae744cd91504899bda9c4e5ff28519bfe416f3d159cb72395417c66e230d2e59df3cae57083eae4c35df8ed94cbd167ba62f31a4efdd789c34d70abd3189097fc9f298a42b3d9d55738af3cd519c378e98917b31f389ddb752dc02f5fe73c07efb00c4fa8a04221f1e0728bfe4fd5bb226b992742700e285ad87ff8c91d93a527cdb313fb383e3e74c4693d2faed138c269fa608ff99b26c81" />
+        <InternalsVisibleTo Include="$(AssemblyName).Tests,PublicKey=0024000004800000140100000602000000240000525341310008000001000100afb529302013f08ec4f0240ed399eb5c058b60186982083bd0427ff2ca9a3adf2348eae455b1450332964c0a7c330fff1d51a2a3c5dd88b3a3d44d1f74251df029347c305085808fc0f3ceb8ab9d5fe2744f62e03371c549b94e2ebf2b80fde28da545d08b4ba4ae744cd91504899bda9c4e5ff28519bfe416f3d159cb72395417c66e230d2e59df3cae57083eae4c35df8ed94cbd167ba62f31a4efdd789c34d70abd3189097fc9f298a42b3d9d55738af3cd519c378e98917b31f389ddb752dc02f5fe73c07efb00c4fa8a04221f1e0728bfe4fd5bb226b992742700e285ad87ff8c91d93a527cdb313fb383e3e74c4693d2faed138c269fa608ff99b26c81"/>
     </ItemGroup>
 
     <ItemGroup>

@@ -1,5 +1,3 @@
-// FILEPATH: /Users/jonas/Documents/git/jjm-one/jjm.one.CommandLineToolWrapper/tests/jjm.one.CommandLineToolWrapper.Tests/backend/ToolWrapperTests.cs
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,9 +11,9 @@ namespace jjm.one.CommandLineToolWrapper.Tests;
 
 public class ToolWrapperTests
 {
-    private readonly ToolWrapper _toolWrapper;
-    private readonly Mock<IProcessRunner> _mockProcessRunner;
     private readonly Mock<ILogger<ToolWrapper>> _mockLogger;
+    private readonly Mock<IProcessRunner> _mockProcessRunner;
+    private readonly ToolWrapper _toolWrapper;
 
     public ToolWrapperTests()
     {
@@ -35,12 +33,11 @@ public class ToolWrapperTests
         };
         _toolWrapper = new ToolWrapper(toolSettings, wrapperSettings, _mockProcessRunner.Object, _mockLogger.Object);
     }
-    
+
     [Fact]
     public async Task RunCommandAsync_ShouldReturnProcessResult_WhenProcessExitsWithZero()
     {
         // Arrange
-        var startInfo = new ProcessStartInfo("/usr/bin/test", "test arg");
         _mockProcessRunner.Setup(p => p.RunProcessAsync(It.IsAny<ProcessStartInfo>(),
                 true, true))
             .ReturnsAsync(new ProcessResult { ExitCode = 0, Output = "test output", Error = "" });
@@ -58,7 +55,7 @@ public class ToolWrapperTests
     public async Task RunCommandAsync_ShouldThrowArgumentException_WhenCommandNotFound()
     {
         // Arrange
-        var command = "nonexistent";
+        const string command = "nonexistent";
 
         // Act
         Func<Task> act = async () => await _toolWrapper.RunCommandAsync(command, "arg");
@@ -72,7 +69,7 @@ public class ToolWrapperTests
     public async Task RunCommandAsync_ShouldThrowArgumentException_WhenIncorrectNumberOfArguments()
     {
         // Arrange
-        var command = "test";
+        const string command = "test";
 
         // Act
         Func<Task> act = async () => await _toolWrapper.RunCommandAsync(command);
@@ -81,14 +78,14 @@ public class ToolWrapperTests
         await act.Should().ThrowAsync<ArgumentException>()
             .WithMessage($"Command '{command}' expects 1 arguments, but got 0. (Parameter 'args')");
     }
-    
+
     [Fact]
     public async Task RunCommandAsync_ShouldRetry_WhenProcessExitsWithNonZero()
     {
         // Arrange
-        _mockProcessRunner.Setup(p => p.RunProcessAsync(It.IsAny<ProcessStartInfo>(), 
-                true, true)).ThrowsAsync(
-            new ProcessFailedException("test", "args", 
+        _mockProcessRunner.Setup(p => p.RunProcessAsync(It.IsAny<ProcessStartInfo>(),
+            true, true)).ThrowsAsync(
+            new ProcessFailedException("test", "args",
                 new ProcessResult { ExitCode = 1, Output = "", Error = "test error" }));
 
         // Act
@@ -101,19 +98,19 @@ public class ToolWrapperTests
             exc.Result.ExitCode == 1 &&
             exc.Result.Output != null && exc.Result.Output.Equals("") &&
             exc.Result.Error != null && exc.Result.Error.Equals("test error"));
-        _mockProcessRunner.Verify(p => 
+        _mockProcessRunner.Verify(p =>
             p.RunProcessAsync(It.IsAny<ProcessStartInfo>(), true, true), Times.Exactly(4));
     }
-    
+
     [Fact]
     public async Task RunCommandAsync_ShouldLogError_WhenProcessExitsWithNonZero()
     {
         // Arrange
-        _mockProcessRunner.Setup(p => p.RunProcessAsync(It.IsAny<ProcessStartInfo>(), 
+        _mockProcessRunner.Setup(p => p.RunProcessAsync(It.IsAny<ProcessStartInfo>(),
             true, true)).ThrowsAsync(
-            new ProcessFailedException("test", "args", 
+            new ProcessFailedException("test", "args",
                 new ProcessResult { ExitCode = 1, Output = "", Error = "test error" }));
-        
+
         // Act
         Func<Task> act = async () => await _toolWrapper.RunCommandAsync("test", "arg");
 
