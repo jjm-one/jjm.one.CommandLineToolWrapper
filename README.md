@@ -72,9 +72,9 @@ This class represents the result of a process run by the `ToolWrapper`. It conta
 ```csharp
 public class ProcessResult
 {
-    public int ExitCode { get; set; }
-    public string? Output { get; set; }
-    public string? Error { get; set; }
+    public int ExitCode { get; init; }
+    public string? Output { get; init; }
+    public string? Error { get; init; }
 }
 ```
 
