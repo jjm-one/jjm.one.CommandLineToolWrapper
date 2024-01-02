@@ -4,11 +4,11 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Version>1.0.0-alpha.1</Version>
+        <Version>1.0.0-alpha.2</Version>
         <Authors>Jonas Merkle [JJM]</Authors>
         <Copyright>© by Jonas Merkle [JJM], 2024.</Copyright>
-        <PackageId>jjm.one.CommandLineToolWrappe</PackageId>
-        <Title>jjm.one.CommandLineToolWrappe</Title>
+        <PackageId>jjm.one.CommandLineToolWrapper</PackageId>
+        <Title>jjm.one.CommandLineToolWrapper</Title>
         <Description>A C# library that provides a wrapper for command line tools.</Description>
         <PackageTags>csharp, wrapper, command-line-tool</PackageTags>
         <PackageProjectUrl>https://github.com/jjm-one/jjm.one.CommandLineToolWrapper</PackageProjectUrl>
