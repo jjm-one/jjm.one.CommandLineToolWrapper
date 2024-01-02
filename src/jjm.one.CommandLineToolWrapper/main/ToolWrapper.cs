@@ -189,7 +189,7 @@ public partial class ToolWrapper : IToolWrapper
     internal bool CheckOutput(string? output)
     {
         return output != null && _wrapperSettings.RetryUseOutputAnalysis &&
-               _toolSettings.RetryOutputContains.Any(output.Contains);
+               _toolSettings.RetryOutputContains.Exists(output.Contains);
     }
 
     /// <summary>
@@ -200,7 +200,7 @@ public partial class ToolWrapper : IToolWrapper
     internal bool CheckError(string? error)
     {
         return error != null && _wrapperSettings.RetryUseErrorAnalysis &&
-               _toolSettings.RetryErrorContains.Any(error.Contains);
+               _toolSettings.RetryErrorContains.Exists(error.Contains);
     }
 
     #endregion
