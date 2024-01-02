@@ -49,11 +49,6 @@ public partial class ToolWrapper : IToolWrapper
     /// </summary>
     private readonly ILogger<ToolWrapper>? _logger;
 
-    /// <summary>
-    /// The dictionary mapping command names to their templates.
-    /// </summary>
-    private readonly Dictionary<string, string> _commandTemplates;
-
     #endregion
     
     #region ctor's
@@ -72,19 +67,6 @@ public partial class ToolWrapper : IToolWrapper
         _toolSettings = toolSettings;
         _wrapperSettings = wrapperSettings;
         _logger = logger;
-        
-        // initialize the command templates
-        _commandTemplates = new Dictionary<string, string>
-        {
-            { "help", "--help" },
-            { "version", "--version" },
-        };
-        
-        // add the command templates from the settings
-        foreach (var command in _toolSettings.CommandTemplates)
-        {
-            _commandTemplates[command.Key] = command.Value;
-        }
     }
 
     #endregion
@@ -106,16 +88,16 @@ public partial class ToolWrapper : IToolWrapper
                 {
                     // On retry, log a warning message
                     _logger?.LogWarning(
-                        "Retry {retryCount} for command '{command}' due to an error: {exception.Message}",
+                        "Retry {RetryCount} for command '{Command}' due to an error: {ExceptionMessage}",
                         retryCount, command, exception.Message);
                 });
         
         return await retryPolicy.ExecuteAsync(async () =>
         {
             // Check if the command exists in the command templates
-            if (!_commandTemplates.TryGetValue(command, out var commandTemplate))
+            if (!_toolSettings.CommandTemplates.TryGetValue(command, out var commandTemplate))
             {
-                _logger?.LogError("Command '{command}' not found.", command);
+                _logger?.LogError("Command '{Command}' not found", command);
                 throw new ArgumentException($"Command '{command}' not found.", nameof(command));
             }
 
@@ -124,7 +106,7 @@ public partial class ToolWrapper : IToolWrapper
             if (args.Length != expectedArgs)
             {
                 _logger?.LogError(
-                    "Command '{command}' expects {expectedArgs} arguments, but got {args.Length}.",
+                    "Command '{Command}' expects {ExpectedArgs} arguments, but got {ArgsLength}",
                     command, expectedArgs, args.Length);
                 throw new ArgumentException(
                     $"Command '{command}' expects {expectedArgs} arguments, but got {args.Length}.", 
@@ -143,7 +125,7 @@ public partial class ToolWrapper : IToolWrapper
             };
 
             // Log the command that will be run
-            _logger?.LogDebug("Starting process with command: '{startInfo.FileName} {startInfo.Arguments}'",
+            _logger?.LogDebug("Starting process with command: '{FileName} {Arguments}'",
                 startInfo.FileName, startInfo.Arguments);
 
             // Start a stopwatch to measure the execution time
@@ -156,7 +138,7 @@ public partial class ToolWrapper : IToolWrapper
 
                 if (_logger != null && _logger.IsEnabled(LogLevel.Debug))
                 {
-                    _logger.LogDebug("Process exited with code {result.ExitCode}. Output: {result.Output}",
+                    _logger.LogDebug("Process exited with code {ExitCode}. Output: {Output}",
                         result.ExitCode, result.Output);
                 }
 
@@ -166,13 +148,13 @@ public partial class ToolWrapper : IToolWrapper
             catch (ProcessFailedException ex)
             {
                 // Handle a <see cref="ProcessFailedException"/> by logging the error and throwing it again
-                _logger?.LogError(ex, "An error occurred while running the '{command}' command.", command);
+                _logger?.LogError(ex, "An error occurred while running the '{Command}' command", command);
                 throw;
             }
             catch (Exception ex)
             {
                 // Handle any other exception by logging the error and throwing it again
-                _logger?.LogError(ex, "An unexpected error occurred while running the '{command}' command.", 
+                _logger?.LogError(ex, "An unexpected error occurred while running the '{Command}' command", 
                     command);
                 throw;
             }
@@ -180,7 +162,7 @@ public partial class ToolWrapper : IToolWrapper
             {
                 // Stop the stopwatch and log the execution time
                 stopwatch.Stop();
-                _logger?.LogTrace("Command '{command}' executed in {stopwatch.Elapsed.TotalSeconds} seconds.",
+                _logger?.LogTrace("Command '{Command}' executed in {ElapsedTotalSeconds} seconds",
                     command, stopwatch.Elapsed.TotalSeconds);
             }
         });
