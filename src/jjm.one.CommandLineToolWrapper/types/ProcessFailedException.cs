@@ -2,11 +2,11 @@ using System;
 
 namespace jjm.one.CommandLineToolWrapper.types;
 
-public class ProcessFailedException(int exitCode, string command, string arguments, string? output = null)
-    : Exception($"The process '{command} {arguments}' exited with code {exitCode}.")
+public class ProcessFailedException(string command, string arguments, ProcessResult? processResult = null)
+    : Exception($"The process '{command} {arguments}' exited with code " +
+                $"{(processResult is null? "unknown" : processResult.ExitCode)}.")
 {
-    public int ExitCode { get; } = exitCode;
     public string Command { get; } = command;
     public string Arguments { get; } = arguments;
-    public string? Output { get; } = output;
+    public ProcessResult? Result { get; } = processResult;
 }

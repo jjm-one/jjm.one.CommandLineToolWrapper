@@ -23,12 +23,17 @@ public class ToolSettings
     };
 
     /// <summary>
-    /// Gets or sets the output strings that trigger a retry.
-    /// </summary>
-    public List<string> RetryOutputContains { get; set; } = ["network error", "timeout"];
-
-    /// <summary>
     /// Gets or sets the exit codes that trigger a retry.
     /// </summary>
     public List<int> RetryExitCodes { get; set; } = [1];
+    
+    /// <summary>
+    /// Gets or sets the output strings that trigger a retry.
+    /// </summary>
+    public List<string> RetryOutputContains { get; set; } = ["network error", "timeout"];
+    
+    /// <summary>
+    /// Gets or sets the error strings that trigger a retry.
+    /// </summary>
+    public List<string> RetryErrorContains { get; set; } = ["network error", "timeout"];
 }

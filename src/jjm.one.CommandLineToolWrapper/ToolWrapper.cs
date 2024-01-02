@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -80,8 +79,8 @@ public partial class ToolWrapper : IToolWrapper
         // This policy handles ProcessFailedException, which is thrown when the process fails
         // The policy checks if the exit code or the output of the process indicates a transient error that is worth retrying
         var retryPolicy = Policy
-            .Handle<ProcessFailedException>(ex =>
-                CheckExitCode(ex.ExitCode) || CheckOutput(ex.Output))   // Check if the exception should be handled by the policy
+            .Handle<ProcessFailedException>(ex => ex.Result is not null &&
+                (CheckExitCode(ex.Result.ExitCode) || CheckOutput(ex.Result.Output) || CheckError(ex.Result.Error)))   // Check if the exception should be handled by the policy
             .WaitAndRetryAsync(_wrapperSettings.RetryCount,             // The number of retries
                 _ => TimeSpan.FromSeconds(_wrapperSettings.RetryIntervalInSeconds), // The delay between retries
                 (exception, _, retryCount, _) =>
@@ -190,6 +189,16 @@ public partial class ToolWrapper : IToolWrapper
     private bool CheckOutput(string? output)
     {
         return output != null && _wrapperSettings.RetryUseOutputAnalysis && _toolSettings.RetryOutputContains.Any(output.Contains);
+    }
+    
+    /// <summary>
+    /// Checks if the error should trigger a retry.
+    /// </summary>
+    /// <param name="error">The output to check.</param>
+    /// <returns>True if the output should trigger a retry, false otherwise.</returns>
+    private bool CheckError(string? error)
+    {
+        return error != null && _wrapperSettings.RetryUseErrorAnalysis && _toolSettings.RetryErrorContains.Any(error.Contains);
     }
 
     #endregion

@@ -29,12 +29,17 @@ public class WrapperSettings
     public int RetryIntervalInSeconds { get; set; } = 10;
 
     /// <summary>
-    /// Gets or sets a value indicating whether to use output analysis for retries.
-    /// </summary>
-    public bool RetryUseOutputAnalysis { get; set; } = true;
-
-    /// <summary>
     /// Gets or sets a value indicating whether to use exit code analysis for retries.
     /// </summary>
     public bool RetryUseExitCodeAnalysis { get; set; } = true;
+    
+    /// <summary>
+    /// Gets or sets a value indicating whether to use output analysis for retries.
+    /// </summary>
+    public bool RetryUseOutputAnalysis { get; set; } = true;
+    
+    /// <summary>
+    /// Gets or sets a value indicating whether to use error analysis for retries.
+    /// </summary>
+    public bool RetryUseErrorAnalysis { get; set; } = true;
 }

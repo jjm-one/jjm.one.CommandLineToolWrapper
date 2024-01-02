@@ -13,7 +13,10 @@ public interface IProcessRunner
     /// Runs a process asynchronously using the provided start info.
     /// </summary>
     /// <param name="startInfo">The process start info.</param>
+    /// <param name="captureOutput">Whether to capture the process output.</param>
+    /// <param name="captureError">Whether to capture the process error.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the process result.</returns>
     /// <exception cref="ProcessFailedException">Thrown when the process exits with a non-zero code.</exception>
-    Task<ProcessResult> RunProcessAsync(ProcessStartInfo startInfo);
+    Task<ProcessResult> RunProcessAsync(ProcessStartInfo startInfo, 
+    bool captureOutput = true, bool captureError = true);
 }
