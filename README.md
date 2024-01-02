@@ -2,9 +2,18 @@
 
 A C# library that provides a wrapper for command line tools.
 
+## Status
+
+|                       |                       |
+|----------------------:|-----------------------|
+| Build & Test Status (main) | [![Build&Test](https://github.com/jjm-one/jjm.one.CommandLineToolWrapper/actions/workflows/dotnet.yml/badge.svg)](https://github.com/jjm-one/jjm.one.CommandLineToolWrapper/actions/workflows/dotnet.yml) |
+| Nuget Package Version | [![Nuget Version](https://img.shields.io/nuget/v/jjm.one.CommandLineToolWrapper?style=flat-square)](https://www.nuget.org/packages/jjm.one.CommandLineToolWrapper/) |
+| SonarCloudQuality Gate Status | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jjm-one_jjm.one.CommandLineToolWrapper&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=jjm-one_jjm.one.CommandLineToolWrapper) |
+
 ## Table of contents
 
 - [jjm.one.CommandLineToolWrapper](#jjmonecommandlinetoolwrapper)
+  - [Status](#status)
   - [Table of contents](#table-of-contents)
   - [Brief overview of the interfaces and classes](#brief-overview-of-the-interfaces-and-classes)
     - [`IToolWrapper` Interface](#itoolwrapper-interface)
