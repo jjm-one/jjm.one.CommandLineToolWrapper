@@ -4,7 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Version>1.0.0-alpha.1</Version>
+        <Version>1.0.0</Version>
         <Authors>Jonas Merkle [JJM]</Authors>
         <Copyright>© by Jonas Merkle [JJM], 2024.</Copyright>
         <Title>jjm.one.CommandLineToolWrappe.Tests</Title>
