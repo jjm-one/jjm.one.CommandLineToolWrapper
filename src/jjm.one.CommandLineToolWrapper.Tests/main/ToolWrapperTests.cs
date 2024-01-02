@@ -7,7 +7,7 @@ using jjm.one.CommandLineToolWrapper.settings;
 using jjm.one.CommandLineToolWrapper.types;
 using Microsoft.Extensions.Logging;
 
-namespace jjm.one.CommandLineToolWrapper.Tests;
+namespace jjm.one.CommandLineToolWrapper.Tests.main;
 
 public class ToolWrapperTests
 {
@@ -123,4 +123,173 @@ public class ToolWrapperTests
             It.IsAny<Exception>(),
             It.Is<Func<It.IsAnyType, Exception, string>>((v, t) => true)!), Times.Exactly(4));
     }
+    
+    [Fact]
+    public void CheckExitCode_ReturnsTrue_WhenExitCodeIsInRetryExitCodes()
+    {
+        // Arrange
+        var wrapperSettings = new WrapperSettings
+        {
+            RetryUseExitCodeAnalysis = true
+        };
+        var toolSettings = new ToolSettings
+        {
+            RetryExitCodes = [1]
+        };
+        var toolWrapper = new ToolWrapper(toolSettings, wrapperSettings);
+
+        // Act
+        var result = toolWrapper.CheckExitCode(1);
+
+        // Assert
+        result.Should().BeTrue();
+    }
+
+    [Fact]
+    public void CheckExitCode_ReturnsFalse_WhenExitCodeIsNotInRetryExitCodes()
+    {
+        // Arrange
+        var wrapperSettings = new WrapperSettings
+        {
+            RetryUseExitCodeAnalysis = true
+        };
+        var toolSettings = new ToolSettings
+        {
+            RetryExitCodes = [1]
+        };
+        var toolWrapper = new ToolWrapper(toolSettings, wrapperSettings);
+
+        // Act
+        var result = toolWrapper.CheckExitCode(2);
+
+        // Assert
+        result.Should().BeFalse();
+    }
+    
+    [Fact]
+    public void CheckOutput_ReturnsTrue_WhenOutputContainsRetryOutputString()
+    {
+        // Arrange
+        var wrapperSettings = new WrapperSettings
+        {
+            RetryUseOutputAnalysis = true
+        };
+        var toolSettings = new ToolSettings
+        {
+            RetryOutputContains = ["network error"]
+        };
+        var toolWrapper = new ToolWrapper(toolSettings, wrapperSettings);
+
+        // Act
+        var result = toolWrapper.CheckOutput("A network error occurred");
+
+        // Assert
+        result.Should().BeTrue();
+    }
+
+    [Fact]
+    public void CheckOutput_ReturnsFalse_WhenOutputDoesNotContainRetryOutputString()
+    {
+        // Arrange
+        var wrapperSettings = new WrapperSettings
+        {
+            RetryUseOutputAnalysis = true
+        };
+        var toolSettings = new ToolSettings
+        {
+            RetryOutputContains = ["network error"]
+        };
+        var toolWrapper = new ToolWrapper(toolSettings, wrapperSettings);
+
+        // Act
+        var result = toolWrapper.CheckOutput("An unrelated error occurred");
+
+        // Assert
+        result.Should().BeFalse();
+    }
+
+    [Fact]
+    public void CheckOutput_ReturnsFalse_WhenOutputIsNull()
+    {
+        // Arrange
+        var wrapperSettings = new WrapperSettings
+        {
+            RetryUseOutputAnalysis = true
+        };
+        var toolSettings = new ToolSettings
+        {
+            RetryOutputContains = ["network error"]
+        };
+        var toolWrapper = new ToolWrapper(toolSettings, wrapperSettings);
+
+        // Act
+        var result = toolWrapper.CheckOutput(null);
+
+        // Assert
+        result.Should().BeFalse();
+    }
+    
+    [Fact]
+    public void CheckOutput_ReturnsTrue_WhenErrorContainsRetryErrorString()
+    {
+        // Arrange
+        var wrapperSettings = new WrapperSettings
+        {
+            RetryUseErrorAnalysis = true
+        };
+        var toolSettings = new ToolSettings
+        {
+            RetryErrorContains = ["network error"]
+        };
+        var toolWrapper = new ToolWrapper(toolSettings, wrapperSettings);
+
+        // Act
+        var result = toolWrapper.CheckError("A network error occurred");
+
+        // Assert
+        result.Should().BeTrue();
+    }
+
+    [Fact]
+    public void CheckOutput_ReturnsFalse_WhenErrorDoesNotContainRetryErrorString()
+    {
+        // Arrange
+        var wrapperSettings = new WrapperSettings
+        {
+            RetryUseErrorAnalysis = true
+        };
+        var toolSettings = new ToolSettings
+        {
+            RetryErrorContains = ["network error"]
+        };
+        var toolWrapper = new ToolWrapper(toolSettings, wrapperSettings);
+
+        // Act
+        var result = toolWrapper.CheckError("An unrelated error occurred");
+
+        // Assert
+        result.Should().BeFalse();
+    }
+
+    [Fact]
+    public void CheckOutput_ReturnsFalse_WhenErrorIsNull()
+    {
+        // Arrange
+        var wrapperSettings = new WrapperSettings
+        {
+            RetryUseErrorAnalysis = true
+        };
+        var toolSettings = new ToolSettings
+        {
+            RetryErrorContains = ["network error"]
+        };
+        var toolWrapper = new ToolWrapper(toolSettings, wrapperSettings);
+
+        // Act
+        var result = toolWrapper.CheckError(null);
+
+        // Assert
+        result.Should().BeFalse();
+    }
+    
 }

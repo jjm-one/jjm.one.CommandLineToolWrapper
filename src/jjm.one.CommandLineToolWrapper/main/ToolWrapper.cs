@@ -169,14 +169,14 @@ public partial class ToolWrapper : IToolWrapper
 
     #endregion
 
-    #region private methods
+    #region internal methods
 
     /// <summary>
     ///     Checks if the exit code should trigger a retry.
     /// </summary>
     /// <param name="exitCode">The exit code to check.</param>
     /// <returns>True if the exit code should trigger a retry, false otherwise.</returns>
-    private bool CheckExitCode(int exitCode)
+    internal bool CheckExitCode(int exitCode)
     {
         return _wrapperSettings.RetryUseExitCodeAnalysis && _toolSettings.RetryExitCodes.Contains(exitCode);
     }
@@ -186,7 +186,7 @@ public partial class ToolWrapper : IToolWrapper
     /// </summary>
     /// <param name="output">The output to check.</param>
     /// <returns>True if the output should trigger a retry, false otherwise.</returns>
-    private bool CheckOutput(string? output)
+    internal bool CheckOutput(string? output)
     {
         return output != null && _wrapperSettings.RetryUseOutputAnalysis &&
                _toolSettings.RetryOutputContains.Any(output.Contains);
@@ -197,7 +197,7 @@ public partial class ToolWrapper : IToolWrapper
     /// </summary>
     /// <param name="error">The output to check.</param>
     /// <returns>True if the output should trigger a retry, false otherwise.</returns>
-    private bool CheckError(string? error)
+    internal bool CheckError(string? error)
     {
         return error != null && _wrapperSettings.RetryUseErrorAnalysis &&
                _toolSettings.RetryErrorContains.Any(error.Contains);
