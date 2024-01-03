@@ -1,0 +1,4 @@
+<map id="ToolWrapper" name="ToolWrapper">
+<area shape="rect" id="node1" title="The default implementation of the IToolWrapper interface." alt="" coords="7,80,110,107"/>
+<area shape="rect" id="node2" href="$interfaceIToolWrapper.html" title="Represents a wrapper for a command line tool." alt="" coords="5,5,112,32"/>
+</map>
