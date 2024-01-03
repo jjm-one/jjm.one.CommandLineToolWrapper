@@ -1,3 +1,13 @@
+###########################
+# Custom Ignore Settings: #
+###########################
+
+## Ignore Doxygen generated files
+doc/html
+doc/latex
+doc/man
+
+
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,linux,jetbrains+iml,visualstudio,visualstudiocode,rider,git
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,linux,jetbrains+iml,visualstudio,visualstudiocode,rider,git
 

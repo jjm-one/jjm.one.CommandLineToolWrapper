@@ -15,6 +15,9 @@ A C# library that provides a wrapper for command line tools.
 - [jjm.one.CommandLineToolWrapper](#jjmonecommandlinetoolwrapper)
   - [Status](#status)
   - [Table of contents](#table-of-contents)
+  - [Nuget Package](#nuget-package)
+  - [Full Documentation](#full-documentation)
+  - [Repo](#repo)
   - [Brief overview of the interfaces and classes](#brief-overview-of-the-interfaces-and-classes)
     - [`IToolWrapper` Interface](#itoolwrapper-interface)
     - [`ToolWrapper` Class](#toolwrapper-class)
@@ -22,6 +25,18 @@ A C# library that provides a wrapper for command line tools.
     - [`ToolWrapper` Constructor](#toolwrapper-constructor)
     - [`ToolWrapper.RunCommandAsync` Method](#toolwrapperruncommandasync-method)
   - [Dependency Injection](#dependency-injection)
+
+## Nuget Package
+
+You can get the latest version of this software as a nuget package form [nuget.org](https://www.nuget.org/packages/jjm.one.CommandLineToolWrapper/)
+
+## Full Documentation
+
+The full documentation for this package can be found [here](https://jjm-one.github.io/jjm.one.CommandLineToolWrapper/main/doc/html/index.html).
+
+## Repo
+
+The associated repo for this package can be found [here](https://github.com/jjm-one/jjm.one.CommandLineToolWrapper).
 
 ## Brief overview of the interfaces and classes
 

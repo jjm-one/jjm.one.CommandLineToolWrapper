@@ -124,16 +124,16 @@ jobs:
           cat coverage.xml
           .\..\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
-  #publish-doc:
-  #  name: Publish Documentation
-  #  needs: [build-and-test-debug]
-  #  runs-on: ubuntu-latest
-  #  if: github.event_name != 'pull_request'
-  #  steps:
-  #  - uses: DenverCoder1/doxygen-github-pages-action@v1.3.0
-  #    with:
-  #      github_token: ${{ secrets.GITHUB_TOKEN }}
-  #      branch: gh-pages
-  #      folder: doc/html
-  #      config_file: Doxyfile
-  #      target_folder: ${{ github.ref_name }}/doc/html
+  publish-doc:
+    name: Publish Documentation
+    needs: [build-and-test-debug]
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
+    steps:
+    - uses: DenverCoder1/doxygen-github-pages-action@v1.3.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: gh-pages
+        folder: doc/html
+        config_file: Doxyfile
+        target_folder: ${{ github.ref_name }}/doc/html
