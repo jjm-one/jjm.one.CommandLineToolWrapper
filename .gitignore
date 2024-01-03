@@ -3,9 +3,9 @@
 ###########################
 
 ## Ignore Doxygen generated files
-docs/html
-docs/latex
-docs/man
+doc/html
+doc/latex
+doc/man
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,linux,jetbrains+iml,visualstudio,visualstudiocode,rider,git
