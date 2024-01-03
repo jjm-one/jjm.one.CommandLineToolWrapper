@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$interfaceIToolWrapper.html" title="Represents a wrapper for a command line tool." alt="" coords="5,5,112,32"/>
+<area shape="rect" id="node2" href="$classToolWrapper.html" title="The default implementation of the IToolWrapper interface." alt="" coords="160,5,263,32"/>
+</map>
