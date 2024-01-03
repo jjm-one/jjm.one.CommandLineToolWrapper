@@ -86,6 +86,9 @@ Table of contents</h1>
 <li><a href="#jjmonecommandlinetoolwrapper">jjm.one.CommandLineToolWrapper</a><ul>
 <li><a href="#status">Status</a></li>
 <li><a href="#table-of-contents">Table of contents</a></li>
+<li><a href="#nuget-package">Nuget Package</a></li>
+<li><a href="#full-documentation">Full Documentation</a></li>
+<li><a href="#repo">Repo</a></li>
 <li><a href="#brief-overview-of-the-interfaces-and-classes">Brief overview of the interfaces and classes</a><ul>
 <li><a href="#itoolwrapper-interface"><code>IToolWrapper</code> Interface</a></li>
 <li><a href="#toolwrapper-class"><code>ToolWrapper</code> Class</a></li>
@@ -99,16 +102,25 @@ Table of contents</h1>
 </li>
 </ul>
 <h1><a class="anchor" id="autotoc_md3"></a>
+Nuget Package</h1>
+<p>You can get the latest version of this software as a nuget package form <a href="https://www.nuget.org/packages/jjm.one.CommandLineToolWrapper/">nuget.org</a></p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Full Documentation</h1>
+<p>The full documentation for this package can be found <a href="https://jjm-one.github.io/jjm.one.CommandLineToolWrapper/main/doc/html/index.html">here</a>.</p>
+<h1><a class="anchor" id="autotoc_md5"></a>
+Repo</h1>
+<p>The associated repo for this package can be found <a href="https://github.com/jjm-one/jjm.one.CommandLineToolWrapper">here</a>.</p>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Brief overview of the interfaces and classes</h1>
 <p>All interfaces and classes provided by this package are briefly presented below.</p>
-<h2><a class="anchor" id="autotoc_md4"></a>
+<h2><a class="anchor" id="autotoc_md7"></a>
 &lt;tt&gt;IToolWrapper&lt;/tt&gt; Interface</h2>
 <p>This interface defines a contract for a wrapper around a command line tool. It has a single method, <code>RunCommandAsync</code>, which takes a command and its arguments, and returns a <code>Task</code> that completes with a <code>ProcessResult</code>.</p>
 <div class="fragment"><div class="line">public interface IToolWrapper</div>
 <div class="line">{</div>
 <div class="line">    Task&lt;ProcessResult&gt; RunCommandAsync(string command, string arguments);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md5"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md8"></a>
 &lt;tt&gt;ToolWrapper&lt;/tt&gt; Class</h2>
 <p>This class is the default implementation of the <code><a class="el" href="interfaceIToolWrapper.html" title="Represents a wrapper for a command line tool.">IToolWrapper</a></code> interface. It uses an instance of <code><a class="el" href="interfaceIProcessRunner.html" title="Represents a class that is responsible for running processes.">IProcessRunner</a></code> to execute commands, and logs information about the tool's operations. It also has settings for the command line tool and the wrapper itself, which are provided through the constructor.</p>
 <div class="fragment"><div class="line">public class ToolWrapper : IToolWrapper</div>
@@ -127,7 +139,7 @@ Brief overview of the interfaces and classes</h1>
 <div class="fragment"><div class="line">var toolWrapper = new ToolWrapper(new ToolSettings(), new WrapperSettings());</div>
 <div class="line">var result = await toolWrapper.RunCommandAsync(&quot;echo&quot;, &quot;Hello, world!&quot;);</div>
 <div class="line">Console.WriteLine(result.Output);  // Outputs: Hello, world!</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md6"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md9"></a>
 &lt;tt&gt;ProcessResult&lt;/tt&gt; Class</h2>
 <p>This class represents the result of a process run by the <code><a class="el" href="classToolWrapper.html" title="The default implementation of the IToolWrapper interface.">ToolWrapper</a></code>. It contains the exit code of the process and optionally, the output and error messages.</p>
 <div class="fragment"><div class="line">public class ProcessResult</div>
@@ -141,14 +153,14 @@ Brief overview of the interfaces and classes</h1>
 <div class="line">Console.WriteLine(result.ExitCode);  // Outputs: 0</div>
 <div class="line">Console.WriteLine(result.Output);  // Outputs: Hello, world!</div>
 <div class="line">Console.WriteLine(result.Error);  // Outputs: null</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md7"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md10"></a>
 &lt;tt&gt;ToolWrapper&lt;/tt&gt; Constructor</h2>
 <p>The constructor of the <code><a class="el" href="classToolWrapper.html" title="The default implementation of the IToolWrapper interface.">ToolWrapper</a></code> class takes in <code><a class="el" href="classToolSettings.html" title="Represents the settings for a command line tool.">ToolSettings</a></code> and <code><a class="el" href="classWrapperSettings.html" title="Represents the settings for a command line tool wrapper.">WrapperSettings</a></code> for the command line tool and the wrapper respectively. It also takes an optional <code><a class="el" href="interfaceIProcessRunner.html" title="Represents a class that is responsible for running processes.">IProcessRunner</a></code> and <code>ILogger&lt;<a class="el" href="classToolWrapper.html" title="The default implementation of the IToolWrapper interface.">ToolWrapper</a>&gt;</code>. If no <code><a class="el" href="interfaceIProcessRunner.html" title="Represents a class that is responsible for running processes.">IProcessRunner</a></code> is provided, a new <code>ProcessRunner</code> is created. If no <code>ILogger&lt;<a class="el" href="classToolWrapper.html" title="The default implementation of the IToolWrapper interface.">ToolWrapper</a>&gt;</code> is provided, logging is disabled.</p>
 <div class="fragment"><div class="line">public ToolWrapper(ToolSettings toolSettings, WrapperSettings wrapperSettings, IProcessRunner? processRunner = null, ILogger&lt;ToolWrapper&gt;? logger = null)</div>
 <div class="line">{</div>
 <div class="line">    // ...</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md8"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md11"></a>
 &lt;tt&gt;ToolWrapper.RunCommandAsync&lt;/tt&gt; Method</h2>
 <p>This method is the implementation of the <code>RunCommandAsync</code> method from the <code><a class="el" href="interfaceIToolWrapper.html" title="Represents a wrapper for a command line tool.">IToolWrapper</a></code> interface. It runs a command asynchronously and returns a <code>ProcessResult</code>.</p>
 <div class="fragment"><div class="line">public Task&lt;ProcessResult&gt; RunCommandAsync(string command, string arguments)</div>
@@ -158,7 +170,7 @@ Brief overview of the interfaces and classes</h1>
 </div><!-- fragment --><p>You can use this method to run a command like this:</p>
 <div class="fragment"><div class="line">var result = await toolWrapper.RunCommandAsync(&quot;echo&quot;, &quot;Hello, world!&quot;);</div>
 <div class="line">Console.WriteLine(result.Output);  // Outputs: Hello, world!</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md9"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md12"></a>
 Dependency Injection</h1>
 <p>The <code>AddToolWrapper</code> method is an extension method for <code>IServiceCollection</code> that you can use to register the <code><a class="el" href="classToolWrapper.html" title="The default implementation of the IToolWrapper interface.">ToolWrapper</a></code> class and its dependencies in the dependency injection container.</p>
 <p>Here's an example of how you can use it in the <code>ConfigureServices</code> method of your <code>Startup.cs</code> file:</p>
