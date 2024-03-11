@@ -15,12 +15,12 @@
         <RepositoryType>git</RepositoryType>
         <RepositoryUrl>https://github.com/jjm-one/jjm.one.CommandLineToolWrapper.git</RepositoryUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageLicenseFile>COPYING.LESSER.txt</PackageLicenseFile>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
         <SignAssembly>True</SignAssembly>
         <AssemblyOriginatorKeyFile>jjm.one.CommandLineToolWrapper.SignKey.snk</AssemblyOriginatorKeyFile>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <TargetFramework>net8.0</TargetFramework>
+        <PackageIcon>jjm.one-logo_1024x1024.png</PackageIcon>
     </PropertyGroup>
 
     <ItemGroup>
@@ -33,15 +33,15 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="..\..\COPYING.txt">
-            <Pack>True</Pack>
-            <PackagePath>\</PackagePath>
-        </None>
-        <None Include="..\..\COPYING.LESSER.txt">
+        <None Include="..\..\LICENSE">
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
         <None Include="..\..\README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Include="..\..\resources\logo\jjm.one-logo_1024x1024.png">
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
